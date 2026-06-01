@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Food Tracker — Log Calories &amp; Macros | Camila Nutrition</title>
+  <meta name="description" content="A simple food diary like MyFitnessPal, with East-African foods. Log meals, track calories and macros against your goal — all saved in your browser." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/tailwind-config.js"></script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body class="font-body bg-bg text-ink antialiased">
+  <header id="site-header"></header>
+
+  <section class="pt-32 pb-6 sm:pt-40">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="flex flex-wrap items-end justify-between gap-4" data-reveal>
+        <div class="max-w-2xl">
+          <p class="section-eyebrow">Food Diary</p>
+          <h1 class="section-title">Food tracker</h1>
+          <p class="mt-3 text-lg text-ink-soft">Log what you eat, see your calories and macros, and stay on track — with local foods built in. Everything is saved privately in your browser.</p>
+        </div>
+        <!-- date nav -->
+        <div class="flex items-center gap-2 rounded-full bg-card border border-border shadow-soft px-2 py-2">
+          <button id="date-prev" class="grid h-9 w-9 place-items-center rounded-full hover:bg-muted transition-colors cursor-pointer" aria-label="Previous day"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+          <input id="date-input" type="date" class="bg-transparent text-sm font-600 text-primary-deeper outline-none cursor-pointer" />
+          <button id="date-next" class="grid h-9 w-9 place-items-center rounded-full hover:bg-muted transition-colors cursor-pointer" aria-label="Next day"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+          <button id="date-today" class="rounded-full bg-muted px-3 py-1.5 text-xs font-600 text-primary-deep hover:bg-primary hover:text-white transition-colors cursor-pointer">Today</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUMMARY -->
+  <section class="pb-6">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="rounded-organic-lg bg-primary-deeper text-white p-6 sm:p-8 shadow-soft-lg" data-reveal>
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <div class="flex items-baseline justify-between">
+              <p class="text-sm uppercase tracking-widest text-secondary font-600">Calories</p>
+              <button id="edit-goal-btn" class="text-xs font-600 text-white/70 hover:text-white underline-offset-2 hover:underline cursor-pointer">Edit goal</button>
+            </div>
+            <p class="mt-2 font-display text-4xl font-700"><span id="sum-eaten">0</span> <span class="text-lg font-400 text-white/60">/ <span id="sum-goal">2,000</span> kcal</span></p>
+            <div class="mt-4 h-3 w-full rounded-full bg-white/15 overflow-hidden"><div id="cal-bar" class="h-full rounded-full bg-secondary transition-all duration-500" style="width:0%"></div></div>
+            <p class="mt-2 text-sm text-white/75"><span id="sum-remaining">2,000</span> kcal remaining</p>
+
+            <!-- edit goal panel -->
+            <div id="goal-panel" class="hidden mt-4 rounded-2xl bg-white/10 p-4">
+              <label for="goal-input" class="text-xs font-600 text-white/80">Daily calorie goal</label>
+              <div class="mt-2 flex gap-2">
+                <input id="goal-input" type="number" min="800" max="6000" class="w-full rounded-xl border border-white/25 bg-white/10 px-3 py-2 text-white outline-none focus:border-secondary" />
+                <button id="goal-save" class="rounded-xl bg-accent px-4 py-2 font-600 text-white hover:bg-accent-soft transition-colors cursor-pointer">Save</button>
+              </div>
+              <p class="mt-2 text-xs text-white/60">Tip: use the <a href="calculator.html" class="underline">TDEE calculator</a> to set this automatically.</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-3">
+            <div class="macro-tile"><p class="macro-tile__val"><span id="sum-p">0</span><span class="text-sm text-white/60">/<span id="goal-p">120</span>g</span></p><p class="macro-tile__label">Protein</p><div class="macro-bar"><div id="bar-p" class="macro-bar__fill" style="width:0%"></div></div></div>
+            <div class="macro-tile"><p class="macro-tile__val"><span id="sum-c">0</span><span class="text-sm text-white/60">/<span id="goal-c">200</span>g</span></p><p class="macro-tile__label">Carbs</p><div class="macro-bar"><div id="bar-c" class="macro-bar__fill" style="width:0%"></div></div></div>
+            <div class="macro-tile"><p class="macro-tile__val"><span id="sum-f">0</span><span class="text-sm text-white/60">/<span id="goal-f">55</span>g</span></p><p class="macro-tile__label">Fat</p><div class="macro-bar"><div id="bar-f" class="macro-bar__fill" style="width:0%"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <section class="pb-24">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8 grid lg:grid-cols-12 gap-8 items-start">
+
+      <!-- ADD FOOD -->
+      <div class="lg:col-span-5 rounded-organic-lg bg-card border border-border shadow-soft p-6" data-reveal>
+        <h2 class="font-display text-xl font-600 text-primary-deeper">Add food</h2>
+        <div class="mt-4 relative">
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="food-search" type="text" placeholder="Search foods (e.g. ugali, beans, eggs)…" class="field-input pl-10" autocomplete="off" />
+        </div>
+        <div class="mt-3 flex gap-2 text-xs font-600">
+          <button class="filter-chip is-active" data-filter="all">All</button>
+          <button class="filter-chip" data-filter="local">East-African</button>
+          <button class="filter-chip" data-filter="general">General</button>
+        </div>
+
+        <ul id="food-results" class="mt-4 max-h-80 overflow-y-auto pr-1 space-y-2"></ul>
+
+        <!-- custom food -->
+        <details class="mt-5 rounded-2xl bg-muted p-4">
+          <summary class="cursor-pointer font-600 text-primary-deep text-sm">+ Add a custom food</summary>
+          <div class="mt-3 grid grid-cols-2 gap-2">
+            <input id="cf-name" type="text" placeholder="Name" class="field-input col-span-2 !py-2 text-sm" />
+            <input id="cf-kcal" type="number" min="0" placeholder="kcal" class="field-input !py-2 text-sm" />
+            <input id="cf-p" type="number" min="0" placeholder="protein g" class="field-input !py-2 text-sm" />
+            <input id="cf-c" type="number" min="0" placeholder="carbs g" class="field-input !py-2 text-sm" />
+            <input id="cf-f" type="number" min="0" placeholder="fat g" class="field-input !py-2 text-sm" />
+            <select id="cf-meal" class="field-input !py-2 text-sm col-span-2 cursor-pointer">
+              <option value="breakfast">Breakfast</option><option value="lunch">Lunch</option><option value="dinner">Dinner</option><option value="snacks">Snacks</option>
+            </select>
+            <button id="cf-add" type="button" class="btn-primary col-span-2 !py-2.5 justify-center">Add custom food</button>
+          </div>
+        </details>
+      </div>
+
+      <!-- MEAL LOG -->
+      <div class="lg:col-span-7 space-y-5">
+        <div class="flex items-center justify-between" data-reveal>
+          <h2 class="font-display text-xl font-600 text-primary-deeper">Today's meals</h2>
+          <button id="clear-day" class="text-sm font-600 text-accent hover:underline cursor-pointer">Clear day</button>
+        </div>
+        <div id="meals"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADD MODAL -->
+  <div id="add-modal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-ink/40 backdrop-blur-sm p-4">
+    <div class="w-full max-w-sm rounded-organic-lg bg-card shadow-soft-lg border border-border p-6">
+      <h3 id="modal-food-name" class="font-display text-lg font-600 text-primary-deeper">Food</h3>
+      <p id="modal-food-serving" class="text-sm text-muted-ink"></p>
+      <div class="mt-4 grid grid-cols-2 gap-3">
+        <div><label for="modal-qty" class="field-label">Servings</label><input id="modal-qty" type="number" min="0.25" step="0.25" value="1" class="field-input" /></div>
+        <div><label for="modal-meal" class="field-label">Meal</label><select id="modal-meal" class="field-input cursor-pointer"><option value="breakfast">Breakfast</option><option value="lunch">Lunch</option><option value="dinner">Dinner</option><option value="snacks">Snacks</option></select></div>
+      </div>
+      <p class="mt-3 text-sm text-ink-soft">This adds <span id="modal-kcal" class="font-700 text-primary">0</span> kcal.</p>
+      <div class="mt-5 flex gap-3">
+        <button id="modal-cancel" type="button" class="btn-ghost flex-1 justify-center">Cancel</button>
+        <button id="modal-add" type="button" class="btn-primary flex-1 justify-center">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <footer id="site-footer"></footer>
+  <script src="data/foods.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/tracker.js"></script>
+</body>
+</html>

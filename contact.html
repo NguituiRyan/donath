@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work with Camila — Book a Consultation | Camila Nutrition</title>
+  <meta name="description" content="Book a 1-on-1 nutrition consultation with Camila for a personalised plan built around your goals, health and local food in Kenya or Tanzania." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/tailwind-config.js"></script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body class="font-body bg-bg text-ink antialiased">
+  <header id="site-header"></header>
+
+  <section class="pt-32 pb-24 sm:pt-40">
+    <div class="mx-auto max-w-5xl px-5 sm:px-8">
+      <div class="relative overflow-hidden rounded-organic-lg bg-primary-deeper text-white p-8 sm:p-14 shadow-soft-lg" data-reveal>
+        <div class="blob blob--3" aria-hidden="true"></div>
+        <div class="relative grid lg:grid-cols-2 gap-10 items-center">
+          <div>
+            <p class="section-eyebrow !text-secondary">Let's Work Together</p>
+            <h1 class="mt-2 font-display text-3xl sm:text-4xl font-600 leading-tight">Ready to feel better in your body?</h1>
+            <p class="mt-4 text-white/80">Book a 1-on-1 consultation for a personalised plan — built around your goals, your health, and the food you actually eat in Kenya or Tanzania.</p>
+            <ul class="mt-6 space-y-2 text-white/90 text-sm">
+              <li class="flex items-center gap-2"><svg class="h-5 w-5 text-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Personalised meal plans</li>
+              <li class="flex items-center gap-2"><svg class="h-5 w-5 text-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Blood-sugar &amp; weight support</li>
+              <li class="flex items-center gap-2"><svg class="h-5 w-5 text-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Workout guidance that fits you</li>
+            </ul>
+            <div class="mt-8 flex gap-3">
+              <a href="https://www.instagram.com/_c.a.m.ill.a_/" target="_blank" rel="noopener noreferrer" class="grid h-11 w-11 place-items-center rounded-2xl bg-white/10 hover:bg-white/20 transition-colors cursor-pointer" aria-label="Instagram"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+              <a href="https://www.tiktok.com/@_c.a.m.ill.a_" target="_blank" rel="noopener noreferrer" class="grid h-11 w-11 place-items-center rounded-2xl bg-white/10 hover:bg-white/20 transition-colors cursor-pointer" aria-label="TikTok"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82s.51.5 0 0A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48Z"/></svg></a>
+            </div>
+          </div>
+
+          <form id="contact-form" class="rounded-organic bg-white/10 backdrop-blur p-6 space-y-4" novalidate>
+            <div><label for="c-name" class="text-sm font-500 text-white/90">Name</label><input id="c-name" name="name" type="text" required class="contact-input" placeholder="Your name" /></div>
+            <div><label for="c-email" class="text-sm font-500 text-white/90">Email</label><input id="c-email" name="email" type="email" required class="contact-input" placeholder="you@email.com" /></div>
+            <div><label for="c-goal" class="text-sm font-500 text-white/90">What's your main goal?</label>
+              <select id="c-goal" name="goal" class="contact-input cursor-pointer">
+                <option>Lose weight / body fat</option><option>Manage blood sugar</option><option>Build muscle &amp; strength</option><option>Eat healthier on a budget</option><option>Something else</option>
+              </select>
+            </div>
+            <div><label for="c-msg" class="text-sm font-500 text-white/90">Message <span class="text-white/50">(optional)</span></label><textarea id="c-msg" name="message" rows="3" class="contact-input" placeholder="Tell Camila a little about you…"></textarea></div>
+            <button type="submit" class="w-full inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3.5 font-600 text-white transition-all hover:bg-accent-soft cursor-pointer">Request a consultation</button>
+            <p id="contact-success" class="hidden text-sm font-500 text-center"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="site-footer"></footer>
+  <script src="js/components.js"></script>
+  <script src="js/contact.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+# Third-party reference clone (has its own git history)
+skill-ref/
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Local tooling
+.claude/
+.vercel/
+node_modules/

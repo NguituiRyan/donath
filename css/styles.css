@@ -305,6 +305,7 @@ body { background-image: radial-gradient(circle at 15% -10%, rgba(16,185,129,0.1
 
 /* borders */
 .dark .border-border { border-color:#1F3A30 !important; }
+.dark .divide-border > * + * { border-color:#1F3A30 !important; }
 
 /* custom component surfaces */
 .dark .field-input { background:#16261F; border-color:#1F3A30; color:#E2E8F0; }

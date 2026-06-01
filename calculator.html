@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>(function(){try{var t=localStorage.getItem('camila_theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}})();</script>
   <title>TDEE &amp; Calorie Calculator | Camila Nutrition</title>
   <meta name="description" content="Free TDEE calculator using the Mifflin-St Jeor equation. Find your daily calories, fat-loss and muscle-gain targets, plus macros." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,9 +21,9 @@
     <div class="blob blob--1" aria-hidden="true"></div>
     <div class="mx-auto max-w-7xl px-5 sm:px-8 relative">
       <div class="max-w-2xl" data-reveal>
-        <p class="section-eyebrow">Free Tool</p>
-        <h1 class="section-title">TDEE &amp; calorie calculator</h1>
-        <p class="mt-4 text-lg text-ink-soft">TDEE is the total energy your body burns in a day. Knowing it is the first step to losing fat, maintaining, or building muscle. Nothing is stored or sent anywhere — it stays in your browser.</p>
+        <p class="section-eyebrow" data-sw="Zana Bure">Free Tool</p>
+        <h1 class="section-title" data-sw="Kikokotoo cha TDEE &amp; kalori">TDEE &amp; calorie calculator</h1>
+        <p class="mt-4 text-lg text-ink-soft" data-sw="TDEE ni jumla ya nishati ambayo mwili wako huchoma kwa siku. Kuijua ni hatua ya kwanza kupunguza mafuta, kudumisha, au kujenga misuli. Hakuna kinachohifadhiwa au kutumwa popote — kinabaki kwenye kivinjari chako.">TDEE is the total energy your body burns in a day. Knowing it is the first step to losing fat, maintaining, or building muscle. Nothing is stored or sent anywhere — it stays in your browser.</p>
       </div>
     </div>
   </section>
@@ -33,31 +34,31 @@
         <form id="tdee-form" class="lg:col-span-7 rounded-organic-lg bg-card shadow-soft border border-border p-6 sm:p-8" novalidate data-reveal>
           <div class="grid sm:grid-cols-2 gap-5">
             <fieldset class="sm:col-span-2">
-              <legend class="field-label">Biological sex</legend>
+              <legend class="field-label" data-sw="Jinsia ya kibaolojia">Biological sex</legend>
               <div class="mt-2 grid grid-cols-2 gap-3" role="radiogroup">
-                <label class="seg"><input type="radio" name="sex" value="female" class="sr-only" checked /><span>Female</span></label>
-                <label class="seg"><input type="radio" name="sex" value="male" class="sr-only" /><span>Male</span></label>
+                <label class="seg"><input type="radio" name="sex" value="female" class="sr-only" checked /><span data-sw="Mwanamke">Female</span></label>
+                <label class="seg"><input type="radio" name="sex" value="male" class="sr-only" /><span data-sw="Mwanaume">Male</span></label>
               </div>
             </fieldset>
-            <div><label for="age" class="field-label">Age <span class="text-muted-ink font-400">(years)</span></label><input id="age" name="age" type="number" inputmode="numeric" min="14" max="100" placeholder="30" class="field-input" required /></div>
-            <div><label for="height" class="field-label">Height <span class="text-muted-ink font-400">(cm)</span></label><input id="height" name="height" type="number" inputmode="decimal" min="120" max="230" placeholder="170" class="field-input" required /></div>
-            <div><label for="weight" class="field-label">Weight <span class="text-muted-ink font-400">(kg)</span></label><input id="weight" name="weight" type="number" inputmode="decimal" min="35" max="250" step="0.1" placeholder="70" class="field-input" required /></div>
+            <div><label for="age" class="field-label" data-sw="Umri <span class=&quot;text-muted-ink font-400&quot;>(miaka)</span>">Age <span class="text-muted-ink font-400">(years)</span></label><input id="age" name="age" type="number" inputmode="numeric" min="14" max="100" placeholder="30" class="field-input" required /></div>
+            <div><label for="height" class="field-label" data-sw="Urefu <span class=&quot;text-muted-ink font-400&quot;>(cm)</span>">Height <span class="text-muted-ink font-400">(cm)</span></label><input id="height" name="height" type="number" inputmode="decimal" min="120" max="230" placeholder="170" class="field-input" required /></div>
+            <div><label for="weight" class="field-label" data-sw="Uzito <span class=&quot;text-muted-ink font-400&quot;>(kg)</span>">Weight <span class="text-muted-ink font-400">(kg)</span></label><input id="weight" name="weight" type="number" inputmode="decimal" min="35" max="250" step="0.1" placeholder="70" class="field-input" required /></div>
             <div>
-              <label for="activity" class="field-label">Activity level</label>
+              <label for="activity" class="field-label" data-sw="Kiwango cha shughuli">Activity level</label>
               <select id="activity" name="activity" class="field-input cursor-pointer">
-                <option value="1.2">Sedentary — desk job, little exercise</option>
-                <option value="1.375" selected>Lightly active — walks, 1–3 workouts/wk</option>
-                <option value="1.55">Moderately active — 3–5 workouts/wk</option>
-                <option value="1.725">Very active — 6–7 hard sessions/wk</option>
-                <option value="1.9">Athlete — physical job + daily training</option>
+                <option value="1.2" data-sw="Kukaa tu — kazi ya mezani, mazoezi kidogo">Sedentary — desk job, little exercise</option>
+                <option value="1.375" selected data-sw="Shughuli kidogo — kutembea, mazoezi 1–3/wiki">Lightly active — walks, 1–3 workouts/wk</option>
+                <option value="1.55" data-sw="Shughuli za wastani — mazoezi 3–5/wiki">Moderately active — 3–5 workouts/wk</option>
+                <option value="1.725" data-sw="Shughuli nyingi — vipindi 6–7 vigumu/wiki">Very active — 6–7 hard sessions/wk</option>
+                <option value="1.9" data-sw="Mwanariadha — kazi ya mwili + mazoezi kila siku">Athlete — physical job + daily training</option>
               </select>
             </div>
           </div>
           <div class="mt-7 flex flex-wrap gap-3">
-            <button type="submit" class="btn-primary">Calculate
+            <button type="submit" class="btn-primary" data-sw="Kokotoa&nbsp;<svg class=&quot;h-5 w-5&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;><path d=&quot;M5 12h14&quot;/><path d=&quot;m12 5 7 7-7 7&quot;/></svg>">Calculate
               <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </button>
-            <button type="reset" class="btn-ghost">Reset</button>
+            <button type="reset" class="btn-ghost" data-sw="Anza upya">Reset</button>
           </div>
           <p id="tdee-error" class="mt-4 hidden text-sm font-500 text-accent"></p>
         </form>
@@ -66,31 +67,31 @@
           <div id="tdee-results" class="rounded-organic-lg bg-primary-deeper text-white shadow-soft-lg p-6 sm:p-8" aria-live="polite">
             <div id="tdee-placeholder" class="text-center py-8">
               <div class="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-white/10"><svg class="h-8 w-8 text-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
-              <p class="mt-4 font-display text-lg">Your results will appear here</p>
-              <p class="mt-1 text-sm text-white/70">Fill in the form and tap Calculate.</p>
+              <p class="mt-4 font-display text-lg" data-sw="Matokeo yako yataonekana hapa">Your results will appear here</p>
+              <p class="mt-1 text-sm text-white/70" data-sw="Jaza fomu kisha bonyeza Kokotoa.">Fill in the form and tap Calculate.</p>
             </div>
             <div id="tdee-output" class="hidden">
-              <p class="text-sm uppercase tracking-widest text-secondary font-600">Maintenance (TDEE)</p>
-              <p class="mt-1"><span id="r-tdee" class="font-display text-5xl font-700">0</span> <span class="text-white/70">kcal/day</span></p>
-              <p class="mt-1 text-sm text-white/70">Your BMR (at rest): <span id="r-bmr" class="font-600 text-white">0</span> kcal</p>
+              <p class="text-sm uppercase tracking-widest text-secondary font-600" data-sw="Kudumisha (TDEE)">Maintenance (TDEE)</p>
+              <p class="mt-1"><span id="r-tdee" class="font-display text-5xl font-700">0</span> <span class="text-white/70" data-sw="kcal/siku">kcal/day</span></p>
+              <p class="mt-1 text-sm text-white/70"><span data-sw="BMR yako (ukipumzika):">Your BMR (at rest):</span> <span id="r-bmr" class="font-600 text-white">0</span> kcal</p>
               <div class="mt-6 grid grid-cols-1 gap-3">
-                <div class="goal-row"><span>Mild fat loss <span class="text-white/60">(−0.25 kg/wk)</span></span><strong id="r-mildloss">0</strong></div>
-                <div class="goal-row goal-row--hot"><span>Fat loss <span class="text-white/70">(−0.5 kg/wk)</span></span><strong id="r-loss">0</strong></div>
-                <div class="goal-row"><span>Lean gain <span class="text-white/60">(+0.25 kg/wk)</span></span><strong id="r-gain">0</strong></div>
+                <div class="goal-row"><span data-sw="Kupunguza mafuta kidogo <span class=&quot;text-white/60&quot;>(−0.25 kg/wiki)</span>">Mild fat loss <span class="text-white/60">(−0.25 kg/wk)</span></span><strong id="r-mildloss">0</strong></div>
+                <div class="goal-row goal-row--hot"><span data-sw="Kupunguza mafuta <span class=&quot;text-white/70&quot;>(−0.5 kg/wiki)</span>">Fat loss <span class="text-white/70">(−0.5 kg/wk)</span></span><strong id="r-loss">0</strong></div>
+                <div class="goal-row"><span data-sw="Kuongeza misuli <span class=&quot;text-white/60&quot;>(+0.25 kg/wiki)</span>">Lean gain <span class="text-white/60">(+0.25 kg/wk)</span></span><strong id="r-gain">0</strong></div>
               </div>
               <div class="mt-6 border-t border-white/15 pt-5">
-                <p class="text-sm uppercase tracking-widest text-secondary font-600">Suggested macros <span class="normal-case tracking-normal text-white/60">(at fat-loss target)</span></p>
+                <p class="text-sm uppercase tracking-widest text-secondary font-600" data-sw="Macro zinazopendekezwa <span class=&quot;normal-case tracking-normal text-white/60&quot;>(kwa lengo la kupunguza mafuta)</span>">Suggested macros <span class="normal-case tracking-normal text-white/60">(at fat-loss target)</span></p>
                 <div class="mt-3 grid grid-cols-3 gap-3 text-center">
-                  <div class="rounded-2xl bg-white/10 p-3"><p id="r-protein" class="font-display text-2xl font-700">0g</p><p class="text-xs text-white/70">Protein</p></div>
-                  <div class="rounded-2xl bg-white/10 p-3"><p id="r-carbs" class="font-display text-2xl font-700">0g</p><p class="text-xs text-white/70">Carbs</p></div>
-                  <div class="rounded-2xl bg-white/10 p-3"><p id="r-fat" class="font-display text-2xl font-700">0g</p><p class="text-xs text-white/70">Fat</p></div>
+                  <div class="rounded-2xl bg-white/10 p-3"><p id="r-protein" class="font-display text-2xl font-700">0g</p><p class="text-xs text-white/70" data-sw="Protini">Protein</p></div>
+                  <div class="rounded-2xl bg-white/10 p-3"><p id="r-carbs" class="font-display text-2xl font-700">0g</p><p class="text-xs text-white/70" data-sw="Wanga">Carbs</p></div>
+                  <div class="rounded-2xl bg-white/10 p-3"><p id="r-fat" class="font-display text-2xl font-700">0g</p><p class="text-xs text-white/70" data-sw="Mafuta">Fat</p></div>
                 </div>
               </div>
-              <button id="send-to-tracker" type="button" class="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 font-600 text-white transition-all hover:bg-accent-soft cursor-pointer">
+              <button id="send-to-tracker" type="button" class="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 font-600 text-white transition-all hover:bg-accent-soft cursor-pointer" data-sw="Tumia lengo hili kwenye Kufuatilia Chakula">
                 Use this goal in my Food Tracker
               </button>
               <p id="goal-saved" class="mt-2 hidden text-center text-sm text-secondary font-500"></p>
-              <p class="mt-4 text-xs text-white/60">Estimates use the Mifflin-St Jeor equation. These are starting points, not medical advice — adjust based on real-world results over 2–3 weeks.</p>
+              <p class="mt-4 text-xs text-white/60" data-sw="Makadirio yanatumia mlinganyo wa Mifflin-St Jeor. Haya ni mahali pa kuanzia, si ushauri wa daktari — rekebisha kulingana na matokeo halisi baada ya wiki 2–3.">Estimates use the Mifflin-St Jeor equation. These are starting points, not medical advice — adjust based on real-world results over 2–3 weeks.</p>
             </div>
           </div>
         </div>

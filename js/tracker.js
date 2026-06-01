@@ -4,11 +4,22 @@
 
   var DB = window.FOOD_DB || [];
   var MEALS = [
-    { key: 'breakfast', label: 'Breakfast' },
-    { key: 'lunch', label: 'Lunch' },
-    { key: 'dinner', label: 'Dinner' },
-    { key: 'snacks', label: 'Snacks' }
+    { key: 'breakfast', label: 'Breakfast', sw: 'Kifungua kinywa' },
+    { key: 'lunch', label: 'Lunch', sw: 'Chakula cha mchana' },
+    { key: 'dinner', label: 'Dinner', sw: 'Chakula cha jioni' },
+    { key: 'snacks', label: 'Snacks', sw: 'Vitafunio' }
   ];
+
+  function lang() { return (window.CamilaI18n && window.CamilaI18n.getLang()) || 'en'; }
+  var T = {
+    noFoods: { en: 'No foods found. Try the custom food option below.', sw: 'Hakuna vyakula vilivyopatikana. Jaribu chaguo la chakula maalum hapa chini.' },
+    nothing: { en: 'Nothing logged yet.', sw: 'Hakuna kilichoandikwa bado.' },
+    over: { en: ' over', sw: ' zaidi' },
+    tagLocal: { en: 'Local', sw: 'Kienyeji' },
+    tagStreet: { en: 'Street', sw: 'Mtaani' },
+    tagGeneral: { en: 'General', sw: 'Kawaida' }
+  };
+  function t(k) { return T[k][lang()] || T[k].en; }
 
   var DEFAULT_GOAL = { calorieGoal: 2000, protein: 120, carbs: 200, fat: 55 };
 
@@ -66,14 +77,15 @@
   function renderResults() {
     var foods = matchFoods();
     if (!foods.length) {
-      resultsEl.innerHTML = '<li class="text-sm text-muted-ink py-4 text-center">No foods found. Try the custom food option below.</li>';
+      resultsEl.innerHTML = '<li class="text-sm text-muted-ink py-4 text-center">' + t('noFoods') + '</li>';
       return;
     }
     resultsEl.innerHTML = foods.slice(0, 40).map(function (food, i) {
       var idx = DB.indexOf(food);
-      var tag = food.cat === 'local'
-        ? '<span class="result-tag bg-primary/10 text-primary">Local</span>'
-        : '<span class="result-tag bg-muted text-muted-ink">General</span>';
+      var tag;
+      if (food.cat === 'local') tag = '<span class="result-tag bg-primary/10 text-primary">' + t('tagLocal') + '</span>';
+      else if (food.cat === 'street') tag = '<span class="result-tag bg-accent/10 text-accent">' + t('tagStreet') + '</span>';
+      else tag = '<span class="result-tag bg-muted text-muted-ink">' + t('tagGeneral') + '</span>';
       return '<li>' +
         '<button class="result-row" data-idx="' + idx + '">' +
           '<span class="min-w-0">' +
@@ -152,10 +164,10 @@
             '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>' +
           '</button></span>' +
         '</li>';
-      }).join('') : '<li class="text-sm text-muted-ink px-1 py-3">Nothing logged yet.</li>';
+      }).join('') : '<li class="text-sm text-muted-ink px-1 py-3">' + t('nothing') + '</li>';
 
       return '<div class="meal-block">' +
-        '<div class="meal-head"><h3 class="font-600 text-primary-deeper">' + m.label + '</h3>' +
+        '<div class="meal-head"><h3 class="font-600 text-primary-deeper">' + (lang() === 'sw' ? m.sw : m.label) + '</h3>' +
         '<span class="text-sm font-600 text-muted-ink">' + fmt(subtotal) + ' kcal</span></div>' +
         '<ul class="mt-2 space-y-1.5">' + rows + '</ul>' +
       '</div>';
@@ -173,7 +185,7 @@
     $('sum-eaten').textContent = fmt(tot.kcal);
     $('sum-goal').textContent = fmt(goal.calorieGoal);
     var remaining = goal.calorieGoal - tot.kcal;
-    $('sum-remaining').textContent = fmt(Math.abs(remaining)) + (remaining < 0 ? ' over' : '');
+    $('sum-remaining').textContent = fmt(Math.abs(remaining)) + (remaining < 0 ? t('over') : '');
     var calPct = Math.min((tot.kcal / goal.calorieGoal) * 100, 100);
     var calBar = $('cal-bar');
     calBar.style.width = calPct + '%';
@@ -288,4 +300,10 @@
   renderResults();
   render();
   bind();
+
+  // re-render dynamic content when the language toggle changes
+  document.addEventListener('camila:lang', function () {
+    renderResults();
+    render();
+  });
 })();

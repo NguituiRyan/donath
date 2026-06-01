@@ -1,5 +1,6 @@
 /* Shared Tailwind Play CDN config — loaded after the CDN script on every page */
 tailwind.config = {
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {

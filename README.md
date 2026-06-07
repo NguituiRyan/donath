@@ -11,7 +11,7 @@ Built as a fast, static site (HTML + Tailwind CSS + vanilla JavaScript) — no b
 |------|------|--------------|
 | Home | `index.html` | Intro, balanced-plate guide, links to every tool |
 | TDEE Calculator | `calculator.html` | Mifflin-St Jeor calorie & macro calculator; can push a goal to the tracker |
-| Food Tracker | `tracker.html` | MyFitnessPal-style food diary with East-African foods, saved in the browser |
+| Food Tracker | `tracker.html` | Full-featured food diary with Kenyan & East-African foods, saved in the browser |
 | Local Nutrition | `nutrition.html` | Eating well with affordable East-African foods |
 | Blood Sugar & Insulin | `blood-sugar.html` | How insulin works + 5 practical tips |
 | Exercise | `exercise.html` | Walking/cardio, gym strength and home workouts |
@@ -20,8 +20,8 @@ Built as a fast, static site (HTML + Tailwind CSS + vanilla JavaScript) — no b
 ## Features
 
 - **TDEE calculator** — biological sex, age, height, weight, activity → maintenance, fat-loss and lean-gain targets plus protein/carb/fat macros.
-- **Food tracker** — searchable food database (local staples + general foods), per-meal logging, daily calorie & macro totals vs. goal, date navigation, custom foods, and a "Clear day" option. All data is stored privately in the browser via `localStorage`.
-- **Calculator → Tracker integration** — save your calculated calorie goal and it appears automatically in the tracker.
+- **Food tracker** — a large food database (200+ Kenyan & East-African plus general foods) with real serving sizes per food (serving spoon, portion, cup, piece, grams…). Per-meal logging with a serving picker and live nutrition preview, editable entries, recent/frequent/"my foods" tabs, food-group filter, a macro donut, protein/carb/fat bars and fibre/sugar/sodium totals, water log, quick-add calories, exercise calories, daily notes, repeat-yesterday and date navigation. All data is stored privately in the browser via `localStorage`.
+- **Personalised goals** — calorie & macro goals depend on the person: set your sex, age, height, weight, activity and goal right in the tracker, or use the TDEE calculator. The two share one saved profile, so a goal set in either place flows to the other.
 - **Responsive, accessible** design with an Organic Biophilic style (nutrition-green palette, Lora + Raleway fonts).
 
 ## Tech

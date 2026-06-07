@@ -267,6 +267,17 @@ body { background-image: radial-gradient(circle at 15% -10%, rgba(16,185,129,0.1
 .food-tab:hover { border-color:var(--secondary); }
 .food-tab.is-active { background:var(--primary); color:#fff; border-color:var(--primary); }
 
+/* ---------- Tracker: goal panel fields (on dark summary card) ---------- */
+.goal-field {
+  margin-top:0.25rem; width:100%; border-radius:0.75rem;
+  border:1px solid rgba(255,255,255,0.25); background:rgba(255,255,255,0.10);
+  color:#fff; padding:0.5rem 0.7rem; font-size:0.85rem; outline:none;
+  transition:border-color .2s, box-shadow .2s;
+}
+.goal-field:focus { border-color:var(--secondary); box-shadow:0 0 0 3px rgba(16,185,129,0.2); }
+.goal-field::placeholder { color:rgba(255,255,255,0.45); }
+.goal-field option { color:#0F172A; }
+
 /* ---------- Tracker: macro donut ---------- */
 .macro-donut {
   position:relative; height:6.5rem; width:6.5rem; border-radius:50%;

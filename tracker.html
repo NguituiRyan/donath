@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>(function(){try{var t=localStorage.getItem('camila_theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}})();</script>
   <title>Food Tracker — Log Calories &amp; Macros | Camila Nutrition</title>
-  <meta name="description" content="A free food diary like MyFitnessPal, built around Kenyan &amp; East-African foods. Search hundreds of foods with real serving sizes, log meals, track calories, macros, water and more — saved privately in your browser." />
+  <meta name="description" content="A free, full-featured food diary built around Kenyan &amp; East-African foods. Search hundreds of foods with real serving sizes, log meals, track calories, macros, water and more — saved privately in your browser." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -23,7 +23,7 @@
         <div class="max-w-2xl">
           <p class="section-eyebrow" data-sw="Shajara ya Chakula">Food Diary</p>
           <h1 class="section-title" data-sw="Kufuatilia chakula">Food tracker</h1>
-          <p class="mt-3 text-lg text-ink-soft" data-sw="Tafuta mamia ya vyakula vya Kenya na Afrika Mashariki vikiwa na vipimo halisi (kijiko cha kupakulia, kikombe, sehemu…), andika milo yako, na ufuatilie kalori, macro na maji — kama MyFitnessPal. Kila kitu kinahifadhiwa kwa faragha kwenye kivinjari chako.">Search hundreds of Kenyan &amp; East-African foods with real serving sizes (serving spoon, cup, portion…), log your meals, and track calories, macros and water — just like MyFitnessPal. Everything is saved privately in your browser.</p>
+          <p class="mt-3 text-lg text-ink-soft" data-sw="Tafuta mamia ya vyakula vya Kenya na Afrika Mashariki vikiwa na vipimo halisi (kijiko cha kupakulia, kikombe, sehemu…), andika milo yako, na ufuatilie kalori, macro na maji. Kila kitu kinahifadhiwa kwa faragha kwenye kivinjari chako.">Search hundreds of Kenyan &amp; East-African foods with real serving sizes (serving spoon, cup, portion…), log your meals, and track calories, macros and water. Everything is saved privately in your browser.</p>
         </div>
         <!-- date nav -->
         <div class="flex items-center gap-2 rounded-full bg-card border border-border shadow-soft px-2 py-2">
@@ -50,6 +50,9 @@
             <p class="mt-2 font-display text-4xl font-700"><span id="sum-eaten">0</span> <span class="text-lg font-400 text-white/60">/ <span id="sum-goal">2,000</span> kcal</span></p>
             <div class="mt-4 h-3 w-full rounded-full bg-white/15 overflow-hidden"><div id="cal-bar" class="h-full rounded-full bg-secondary transition-all duration-500" style="width:0%"></div></div>
 
+            <!-- personalize prompt (shown until the goal is based on the person) -->
+            <button id="personalize-hint" type="button" class="hidden mt-3 w-full text-left rounded-2xl bg-accent/25 border border-accent/40 px-3 py-2 text-xs text-white hover:bg-accent/35 transition-colors cursor-pointer" data-sw="<span class=&quot;font-700&quot;>Weka taarifa zako</span> upate lengo la kalori na macro kulingana na mwili wako. Bonyeza kuanza."><span class="font-700">Set your details</span> for a calorie &amp; macro goal based on your body. Tap to personalize.</button>
+
             <!-- goal − food + exercise = remaining -->
             <div class="mt-4 grid grid-cols-3 gap-2 text-center">
               <div class="rounded-2xl bg-white/10 py-2"><p class="font-display text-lg font-700"><span id="sum-goal-2">2,000</span></p><p class="text-[0.68rem] uppercase tracking-wide text-white/60" data-sw="Lengo">Goal</p></div>
@@ -57,19 +60,41 @@
               <div class="rounded-2xl bg-secondary/25 py-2"><p class="font-display text-lg font-700"><span id="sum-remaining">2,000</span></p><p class="text-[0.68rem] uppercase tracking-wide text-white/70" data-sw="Zimebaki">Remaining</p></div>
             </div>
 
-            <!-- edit goal panel -->
+            <!-- edit goal panel: personalised to the individual -->
             <div id="goal-panel" class="hidden mt-4 rounded-2xl bg-white/10 p-4">
-              <label for="goal-input" class="text-xs font-600 text-white/80" data-sw="Lengo la kalori kwa siku">Daily calorie goal</label>
-              <div class="mt-2 flex gap-2">
-                <input id="goal-input" type="number" min="800" max="6000" class="w-full rounded-xl border border-white/25 bg-white/10 px-3 py-2 text-white outline-none focus:border-secondary" />
-                <button id="goal-save" class="rounded-xl bg-accent px-4 py-2 font-600 text-white hover:bg-accent-soft transition-colors cursor-pointer" data-sw="Hifadhi">Save</button>
+              <p class="text-xs font-700 uppercase tracking-wide text-secondary" data-sw="Weka lengo kulingana na mwili wako">Set your goal from your body</p>
+              <div class="mt-3 grid grid-cols-2 gap-2">
+                <div class="col-span-2"><label for="g-sex" class="text-[0.68rem] text-white/70" data-sw="Jinsia">Sex</label>
+                  <select id="g-sex" class="goal-field"><option value="female" data-sw="Mwanamke">Female</option><option value="male" data-sw="Mwanaume">Male</option></select></div>
+                <div><label for="g-age" class="text-[0.68rem] text-white/70" data-sw="Umri (miaka)">Age (yrs)</label><input id="g-age" type="number" min="14" max="100" placeholder="30" class="goal-field" /></div>
+                <div><label for="g-weight" class="text-[0.68rem] text-white/70" data-sw="Uzito (kg)">Weight (kg)</label><input id="g-weight" type="number" min="35" max="250" step="0.1" placeholder="70" class="goal-field" /></div>
+                <div><label for="g-height" class="text-[0.68rem] text-white/70" data-sw="Urefu (cm)">Height (cm)</label><input id="g-height" type="number" min="120" max="230" placeholder="170" class="goal-field" /></div>
+                <div><label for="g-aim" class="text-[0.68rem] text-white/70" data-sw="Lengo">Goal</label>
+                  <select id="g-aim" class="goal-field"><option value="lose" data-sw="Kupunguza mafuta">Lose fat</option><option value="maintain" data-sw="Kudumisha">Maintain</option><option value="gain" data-sw="Kuongeza misuli">Build muscle</option></select></div>
+                <div class="col-span-2"><label for="g-activity" class="text-[0.68rem] text-white/70" data-sw="Kiwango cha shughuli">Activity level</label>
+                  <select id="g-activity" class="goal-field">
+                    <option value="1.2" data-sw="Kukaa tu — kazi ya mezani, mazoezi kidogo">Sedentary — desk job, little exercise</option>
+                    <option value="1.375" selected data-sw="Shughuli kidogo — kutembea, mazoezi 1–3/wiki">Lightly active — walks, 1–3 workouts/wk</option>
+                    <option value="1.55" data-sw="Shughuli za wastani — mazoezi 3–5/wiki">Moderately active — 3–5 workouts/wk</option>
+                    <option value="1.725" data-sw="Shughuli nyingi — vipindi 6–7 vigumu/wiki">Very active — 6–7 hard sessions/wk</option>
+                    <option value="1.9" data-sw="Mwanariadha — kazi ya mwili + mazoezi kila siku">Athlete — physical job + daily training</option>
+                  </select></div>
               </div>
-              <div class="mt-3 grid grid-cols-3 gap-2">
-                <div><label for="goal-p-input" class="text-[0.68rem] text-white/70" data-sw="Protini (g)">Protein (g)</label><input id="goal-p-input" type="number" min="0" class="mt-1 w-full rounded-xl border border-white/25 bg-white/10 px-2 py-1.5 text-sm text-white outline-none focus:border-secondary" /></div>
-                <div><label for="goal-c-input" class="text-[0.68rem] text-white/70" data-sw="Wanga (g)">Carbs (g)</label><input id="goal-c-input" type="number" min="0" class="mt-1 w-full rounded-xl border border-white/25 bg-white/10 px-2 py-1.5 text-sm text-white outline-none focus:border-secondary" /></div>
-                <div><label for="goal-f-input" class="text-[0.68rem] text-white/70" data-sw="Mafuta (g)">Fat (g)</label><input id="goal-f-input" type="number" min="0" class="mt-1 w-full rounded-xl border border-white/25 bg-white/10 px-2 py-1.5 text-sm text-white outline-none focus:border-secondary" /></div>
+              <button id="goal-calc" type="button" class="mt-3 w-full rounded-xl bg-secondary px-4 py-2.5 font-600 text-primary-deeper hover:brightness-110 transition cursor-pointer" data-sw="Kokotoa lengo langu">Calculate my goal</button>
+
+              <div class="mt-4 border-t border-white/15 pt-3">
+                <label for="goal-input" class="text-[0.68rem] text-white/70" data-sw="Lengo la kalori kwa siku (waweza kurekebisha)">Daily calorie goal (you can fine-tune)</label>
+                <div class="mt-1 flex items-stretch gap-2">
+                  <input id="goal-input" type="number" min="800" max="6000" class="goal-field !mt-0" />
+                  <button id="goal-save" class="shrink-0 rounded-xl bg-accent px-4 font-600 text-white hover:bg-accent-soft transition-colors cursor-pointer" data-sw="Hifadhi">Save</button>
+                </div>
+                <div class="mt-2 grid grid-cols-3 gap-2">
+                  <div><label for="goal-p-input" class="text-[0.68rem] text-white/70" data-sw="Protini (g)">Protein (g)</label><input id="goal-p-input" type="number" min="0" class="goal-field" /></div>
+                  <div><label for="goal-c-input" class="text-[0.68rem] text-white/70" data-sw="Wanga (g)">Carbs (g)</label><input id="goal-c-input" type="number" min="0" class="goal-field" /></div>
+                  <div><label for="goal-f-input" class="text-[0.68rem] text-white/70" data-sw="Mafuta (g)">Fat (g)</label><input id="goal-f-input" type="number" min="0" class="goal-field" /></div>
+                </div>
               </div>
-              <p class="mt-2 text-xs text-white/60" data-sw="Kidokezo: tumia <a href=&quot;calculator.html&quot; class=&quot;underline&quot;>kikokotoo cha TDEE</a> kupata malengo yako.">Tip: use the <a href="calculator.html" class="underline">TDEE calculator</a> to find your targets.</p>
+              <p class="mt-2 text-xs text-white/60" data-sw="Inatumia mlinganyo wa Mifflin-St Jeor. Au tumia <a href=&quot;calculator.html&quot; class=&quot;underline&quot;>kikokotoo kamili cha TDEE</a>.">Uses the Mifflin-St Jeor equation. Or use the full <a href="calculator.html" class="underline">TDEE calculator</a>.</p>
             </div>
           </div>
 

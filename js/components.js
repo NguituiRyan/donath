@@ -97,6 +97,12 @@
         '<p class="mt-4 text-xs text-muted-ink">© <span data-year></span> Camila Nutrition.</p>' +
         '<p class="mt-1 text-xs text-muted-ink" data-sw="Maudhui ya kielimu — si mbadala wa ushauri wa daktari.">Educational content — not a substitute for medical advice.</p>' +
       '</div>' +
+    '</div>' +
+    '<div class="border-t border-border">' +
+      '<div class="mx-auto max-w-7xl px-5 sm:px-8 py-5 text-center text-xs text-muted-ink">' +
+        '<span data-sw="Imetengenezwa na kubuniwa na">Developed &amp; designed by</span> ' +
+        '<a href="https://nguitui-site.vercel.app/" target="_blank" rel="noopener noreferrer" class="font-700 text-primary hover:underline">Nguitui</a>' +
+      '</div>' +
     '</div>';
 
   /* ---------- THEME ---------- */
@@ -215,6 +221,31 @@
 
   // expose for late-rendered content (e.g. tracker re-renders)
   window.CamilaI18n = { getLang: getLang, apply: applyLang, capture: captureEnglish };
+
+  /* ---------- PERSONAL GOALS (shared by calculator + tracker) ----------
+   * One source of truth so calorie & macro goals always depend on the person.
+   * profile = { sex, age, height, weight, activity, aim }
+   *   activity = TDEE multiplier (1.2–1.9);  aim = 'lose' | 'maintain' | 'gain'
+   */
+  window.CamilaGoals = {
+    GOAL_KEY: 'camila_goal',
+    PROFILE_KEY: 'camila_profile',
+    compute: function (p) {
+      var bmr = (10 * p.weight) + (6.25 * p.height) - (5 * p.age) + (p.sex === 'male' ? 5 : -161);
+      var tdee = bmr * (p.activity || 1.375);
+      var aim = p.aim || 'maintain';
+      var cal = tdee + (aim === 'lose' ? -500 : aim === 'gain' ? 250 : 0);
+      cal = Math.max(Math.round(cal), 1200); // never below a safe floor
+      var protein = Math.round(2 * p.weight);           // 2 g per kg
+      var fat = Math.round((cal * 0.25) / 9);            // 25% of calories
+      var carbs = Math.max(Math.round((cal - protein * 4 - fat * 9) / 4), 0);
+      return { calorieGoal: cal, maintenance: Math.round(tdee), bmr: Math.round(bmr), protein: protein, carbs: carbs, fat: fat, aim: aim };
+    },
+    loadProfile: function () { try { return JSON.parse(localStorage.getItem(this.PROFILE_KEY)); } catch (e) { return null; } },
+    saveProfile: function (p) { try { localStorage.setItem(this.PROFILE_KEY, JSON.stringify(p)); } catch (e) {} },
+    loadGoal: function () { try { return JSON.parse(localStorage.getItem(this.GOAL_KEY)); } catch (e) { return null; } },
+    saveGoal: function (g) { try { localStorage.setItem(this.GOAL_KEY, JSON.stringify(g)); } catch (e) {} }
+  };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', inject);

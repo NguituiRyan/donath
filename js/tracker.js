@@ -1,4 +1,4 @@
-/* ===== Camila Nutrition — Food Tracker (MyFitnessPal-style) ===== */
+/* ===== Camila Nutrition — Food Tracker ===== */
 (function () {
   'use strict';
 
@@ -67,8 +67,7 @@
   function exKey() { return 'camila_exercise_' + dateKey(state.date); }
   function noteKey() { return 'camila_note_' + dateKey(state.date); }
 
-  function loadGoal() {
-    var g = lsGet('camila_goal', null) || {};
+  function normGoal(g) {
     return {
       calorieGoal: g.calorieGoal || DEFAULT_GOAL.calorieGoal,
       protein: g.protein || DEFAULT_GOAL.protein,
@@ -76,7 +75,30 @@
       fat: g.fat || DEFAULT_GOAL.fat
     };
   }
+  // Goals depend on the person: use a saved goal, else compute from their
+  // saved profile (shared with the TDEE calculator), else a neutral default.
+  function loadGoal() {
+    var saved = lsGet('camila_goal', null);
+    if (saved && saved.calorieGoal) return normGoal(saved);
+    var prof = window.CamilaGoals && window.CamilaGoals.loadProfile();
+    if (prof && prof.weight) return normGoal(window.CamilaGoals.compute(prof));
+    return Object.assign({}, DEFAULT_GOAL);
+  }
+  function isPersonalised() {
+    if (lsGet('camila_goal', null)) return true;
+    var prof = window.CamilaGoals && window.CamilaGoals.loadProfile();
+    return !!(prof && prof.weight);
+  }
   function saveGoal(g) { lsSet('camila_goal', g); }
+  function prefillGoalForm() {
+    var prof = (window.CamilaGoals && window.CamilaGoals.loadProfile()) || {};
+    if ($('g-sex')) $('g-sex').value = prof.sex || 'female';
+    if (prof.age) $('g-age').value = prof.age;
+    if (prof.height) $('g-height').value = prof.height;
+    if (prof.weight) $('g-weight').value = prof.weight;
+    if ($('g-activity')) $('g-activity').value = prof.activity || '1.375';
+    if ($('g-aim')) $('g-aim').value = prof.aim || 'maintain';
+  }
   function loadLog() { return lsGet(logKey(), []); }
   function saveLog(log) { lsSet(logKey(), log); }
   function myFoods() { return lsGet('camila_myfoods', []); }
@@ -336,6 +358,9 @@
     $('goal-c-input').value = goal.carbs;
     $('goal-f-input').value = goal.fat;
     $('ex-input').value = exercise || '';
+
+    // nudge the user to personalise until the goal is based on their body
+    $('personalize-hint').classList.toggle('hidden', isPersonalised());
   }
 
   /* ---------- water ---------- */
@@ -453,8 +478,32 @@
       render();
     });
 
-    // goal editing (calories + macros)
-    $('edit-goal-btn').addEventListener('click', function () { $('goal-panel').classList.toggle('hidden'); });
+    // goal editing — open panel + prefill the person's saved details
+    function openGoalPanel() { prefillGoalForm(); $('goal-panel').classList.remove('hidden'); }
+    $('edit-goal-btn').addEventListener('click', function () {
+      var panel = $('goal-panel');
+      if (panel.classList.contains('hidden')) openGoalPanel(); else panel.classList.add('hidden');
+    });
+    $('personalize-hint').addEventListener('click', function () { openGoalPanel(); $('g-age').focus(); });
+
+    // compute calorie + macro goals from the person's body (Mifflin-St Jeor)
+    $('goal-calc').addEventListener('click', function () {
+      var p = {
+        sex: $('g-sex').value,
+        age: parseFloat($('g-age').value),
+        height: parseFloat($('g-height').value),
+        weight: parseFloat($('g-weight').value),
+        activity: parseFloat($('g-activity').value) || 1.375,
+        aim: $('g-aim').value
+      };
+      if (!p.age || !p.height || !p.weight) { (!p.age ? $('g-age') : !p.height ? $('g-height') : $('g-weight')).focus(); return; }
+      var g = window.CamilaGoals.compute(p);
+      window.CamilaGoals.saveProfile(p);
+      saveGoal({ calorieGoal: g.calorieGoal, protein: g.protein, carbs: g.carbs, fat: g.fat });
+      render(); // re-fills the inputs from the new personalised goal
+    });
+
+    // manual fine-tune save
     $('goal-save').addEventListener('click', function () {
       var goal = loadGoal();
       var cal = parseInt($('goal-input').value, 10);
@@ -520,6 +569,7 @@
     searchEl = $('food-search');
     modal = $('add-modal');
     buildGroupFilter();
+    prefillGoalForm();
     syncDateInput();
     renderResults();
     render();

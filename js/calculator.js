@@ -58,8 +58,14 @@
       maintenance: Math.round(tdee),
       protein: Math.round(protein),
       carbs: Math.round(carbs),
-      fat: Math.round(fat)
+      fat: Math.round(fat),
+      aim: 'lose'
     };
+
+    // Remember the person's details so the Food Tracker can personalise too.
+    if (window.CamilaGoals) {
+      window.CamilaGoals.saveProfile({ sex: sex, age: age, height: height, weight: weight, activity: activity, aim: 'lose' });
+    }
 
     placeholder.classList.add('hidden');
     output.classList.remove('hidden');

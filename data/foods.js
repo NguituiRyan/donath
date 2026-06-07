@@ -1,5 +1,5 @@
 /* ===== Camila Nutrition — food database =====
- * A large, MyFitnessPal-style database focused on foods eaten across Kenya
+ * A large food database focused on foods eaten across Kenya
  * and East Africa, plus common general foods.
  *
  * Each food stores a list of SERVING UNITS (e.g. "serving spoon", "1 cup",

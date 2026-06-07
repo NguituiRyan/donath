@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>(function(){try{var t=localStorage.getItem('camila_theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}})();</script>
   <title>Food Tracker — Log Calories &amp; Macros | Camila Nutrition</title>
-  <meta name="description" content="A simple food diary like MyFitnessPal, with East-African foods. Log meals, track calories and macros against your goal — all saved in your browser." />
+  <meta name="description" content="A free food diary like MyFitnessPal, built around Kenyan &amp; East-African foods. Search hundreds of foods with real serving sizes, log meals, track calories, macros, water and more — saved privately in your browser." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -23,7 +23,7 @@
         <div class="max-w-2xl">
           <p class="section-eyebrow" data-sw="Shajara ya Chakula">Food Diary</p>
           <h1 class="section-title" data-sw="Kufuatilia chakula">Food tracker</h1>
-          <p class="mt-3 text-lg text-ink-soft" data-sw="Andika unachokula, ona kalori na macro zako, na ubaki kwenye mstari — na vyakula vya kienyeji vimejumuishwa. Kila kitu kinahifadhiwa kwa faragha kwenye kivinjari chako.">Log what you eat, see your calories and macros, and stay on track — with local foods built in. Everything is saved privately in your browser.</p>
+          <p class="mt-3 text-lg text-ink-soft" data-sw="Tafuta mamia ya vyakula vya Kenya na Afrika Mashariki vikiwa na vipimo halisi (kijiko cha kupakulia, kikombe, sehemu…), andika milo yako, na ufuatilie kalori, macro na maji — kama MyFitnessPal. Kila kitu kinahifadhiwa kwa faragha kwenye kivinjari chako.">Search hundreds of Kenyan &amp; East-African foods with real serving sizes (serving spoon, cup, portion…), log your meals, and track calories, macros and water — just like MyFitnessPal. Everything is saved privately in your browser.</p>
         </div>
         <!-- date nav -->
         <div class="flex items-center gap-2 rounded-full bg-card border border-border shadow-soft px-2 py-2">
@@ -40,15 +40,22 @@
   <section class="pb-6">
     <div class="mx-auto max-w-7xl px-5 sm:px-8">
       <div class="rounded-organic-lg bg-primary-deeper text-white p-6 sm:p-8 shadow-soft-lg" data-reveal>
-        <div class="grid md:grid-cols-2 gap-8 items-center">
-          <div>
+        <div class="grid lg:grid-cols-12 gap-8 items-center">
+          <!-- calories + remaining -->
+          <div class="lg:col-span-5">
             <div class="flex items-baseline justify-between">
               <p class="text-sm uppercase tracking-widest text-secondary font-600" data-sw="Kalori">Calories</p>
-              <button id="edit-goal-btn" class="text-xs font-600 text-white/70 hover:text-white underline-offset-2 hover:underline cursor-pointer" data-sw="Hariri lengo">Edit goal</button>
+              <button id="edit-goal-btn" class="text-xs font-600 text-white/70 hover:text-white underline-offset-2 hover:underline cursor-pointer" data-sw="Hariri malengo">Edit goals</button>
             </div>
             <p class="mt-2 font-display text-4xl font-700"><span id="sum-eaten">0</span> <span class="text-lg font-400 text-white/60">/ <span id="sum-goal">2,000</span> kcal</span></p>
             <div class="mt-4 h-3 w-full rounded-full bg-white/15 overflow-hidden"><div id="cal-bar" class="h-full rounded-full bg-secondary transition-all duration-500" style="width:0%"></div></div>
-            <p class="mt-2 text-sm text-white/75"><span id="sum-remaining">2,000</span> <span data-sw="kcal zimebaki">kcal remaining</span></p>
+
+            <!-- goal − food + exercise = remaining -->
+            <div class="mt-4 grid grid-cols-3 gap-2 text-center">
+              <div class="rounded-2xl bg-white/10 py-2"><p class="font-display text-lg font-700"><span id="sum-goal-2">2,000</span></p><p class="text-[0.68rem] uppercase tracking-wide text-white/60" data-sw="Lengo">Goal</p></div>
+              <div class="rounded-2xl bg-white/10 py-2"><p class="font-display text-lg font-700">+<span id="sum-exercise">0</span></p><p class="text-[0.68rem] uppercase tracking-wide text-white/60" data-sw="Mazoezi">Exercise</p></div>
+              <div class="rounded-2xl bg-secondary/25 py-2"><p class="font-display text-lg font-700"><span id="sum-remaining">2,000</span></p><p class="text-[0.68rem] uppercase tracking-wide text-white/70" data-sw="Zimebaki">Remaining</p></div>
+            </div>
 
             <!-- edit goal panel -->
             <div id="goal-panel" class="hidden mt-4 rounded-2xl bg-white/10 p-4">
@@ -57,14 +64,36 @@
                 <input id="goal-input" type="number" min="800" max="6000" class="w-full rounded-xl border border-white/25 bg-white/10 px-3 py-2 text-white outline-none focus:border-secondary" />
                 <button id="goal-save" class="rounded-xl bg-accent px-4 py-2 font-600 text-white hover:bg-accent-soft transition-colors cursor-pointer" data-sw="Hifadhi">Save</button>
               </div>
-              <p class="mt-2 text-xs text-white/60" data-sw="Kidokezo: tumia <a href=&quot;calculator.html&quot; class=&quot;underline&quot;>kikokotoo cha TDEE</a> kuweka hili kiotomatiki.">Tip: use the <a href="calculator.html" class="underline">TDEE calculator</a> to set this automatically.</p>
+              <div class="mt-3 grid grid-cols-3 gap-2">
+                <div><label for="goal-p-input" class="text-[0.68rem] text-white/70" data-sw="Protini (g)">Protein (g)</label><input id="goal-p-input" type="number" min="0" class="mt-1 w-full rounded-xl border border-white/25 bg-white/10 px-2 py-1.5 text-sm text-white outline-none focus:border-secondary" /></div>
+                <div><label for="goal-c-input" class="text-[0.68rem] text-white/70" data-sw="Wanga (g)">Carbs (g)</label><input id="goal-c-input" type="number" min="0" class="mt-1 w-full rounded-xl border border-white/25 bg-white/10 px-2 py-1.5 text-sm text-white outline-none focus:border-secondary" /></div>
+                <div><label for="goal-f-input" class="text-[0.68rem] text-white/70" data-sw="Mafuta (g)">Fat (g)</label><input id="goal-f-input" type="number" min="0" class="mt-1 w-full rounded-xl border border-white/25 bg-white/10 px-2 py-1.5 text-sm text-white outline-none focus:border-secondary" /></div>
+              </div>
+              <p class="mt-2 text-xs text-white/60" data-sw="Kidokezo: tumia <a href=&quot;calculator.html&quot; class=&quot;underline&quot;>kikokotoo cha TDEE</a> kupata malengo yako.">Tip: use the <a href="calculator.html" class="underline">TDEE calculator</a> to find your targets.</p>
             </div>
           </div>
 
-          <div class="grid grid-cols-3 gap-3">
+          <!-- macro donut -->
+          <div class="lg:col-span-3 flex items-center justify-center gap-4">
+            <div class="macro-donut" id="macro-donut"><div class="macro-donut__hole"><span class="font-display text-xl font-700 text-white" id="donut-kcal">0</span><span class="text-[0.6rem] uppercase tracking-wide text-white/60">kcal</span></div></div>
+            <ul class="space-y-1.5 text-sm">
+              <li class="flex items-center gap-2"><span class="h-3 w-3 rounded-full" style="background:#10B981"></span><span class="text-white/80" data-sw="Protini">Protein</span> <span class="font-600" id="leg-p">0%</span></li>
+              <li class="flex items-center gap-2"><span class="h-3 w-3 rounded-full" style="background:#F59E0B"></span><span class="text-white/80" data-sw="Wanga">Carbs</span> <span class="font-600" id="leg-c">0%</span></li>
+              <li class="flex items-center gap-2"><span class="h-3 w-3 rounded-full" style="background:#EA580C"></span><span class="text-white/80" data-sw="Mafuta">Fat</span> <span class="font-600" id="leg-f">0%</span></li>
+            </ul>
+          </div>
+
+          <!-- macro bars -->
+          <div class="lg:col-span-4 grid grid-cols-3 gap-3">
             <div class="macro-tile"><p class="macro-tile__val"><span id="sum-p">0</span><span class="text-sm text-white/60">/<span id="goal-p">120</span>g</span></p><p class="macro-tile__label" data-sw="Protini">Protein</p><div class="macro-bar"><div id="bar-p" class="macro-bar__fill" style="width:0%"></div></div></div>
             <div class="macro-tile"><p class="macro-tile__val"><span id="sum-c">0</span><span class="text-sm text-white/60">/<span id="goal-c">200</span>g</span></p><p class="macro-tile__label" data-sw="Wanga">Carbs</p><div class="macro-bar"><div id="bar-c" class="macro-bar__fill" style="width:0%"></div></div></div>
             <div class="macro-tile"><p class="macro-tile__val"><span id="sum-f">0</span><span class="text-sm text-white/60">/<span id="goal-f">55</span>g</span></p><p class="macro-tile__label" data-sw="Mafuta">Fat</p><div class="macro-bar"><div id="bar-f" class="macro-bar__fill" style="width:0%"></div></div></div>
+            <!-- micros -->
+            <div class="col-span-3 mt-1 grid grid-cols-3 gap-3 text-center">
+              <div class="rounded-xl bg-white/10 py-2"><p class="font-600 text-sm" id="sum-fb">0 g</p><p class="text-[0.62rem] uppercase tracking-wide text-white/55" data-sw="Nyuzinyuzi">Fibre</p></div>
+              <div class="rounded-xl bg-white/10 py-2"><p class="font-600 text-sm" id="sum-sg">0 g</p><p class="text-[0.62rem] uppercase tracking-wide text-white/55" data-sw="Sukari">Sugar</p></div>
+              <div class="rounded-xl bg-white/10 py-2"><p class="font-600 text-sm" id="sum-na">0 mg</p><p class="text-[0.62rem] uppercase tracking-wide text-white/55" data-sw="Sodiamu">Sodium</p></div>
+            </div>
           </div>
         </div>
       </div>
@@ -78,24 +107,46 @@
       <!-- ADD FOOD -->
       <div class="lg:col-span-5 rounded-organic-lg bg-card border border-border shadow-soft p-6" data-reveal>
         <h2 class="font-display text-xl font-600 text-primary-deeper" data-sw="Ongeza chakula">Add food</h2>
+
+        <!-- search -->
         <div class="mt-4 relative">
           <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input id="food-search" type="text" placeholder="Search foods (e.g. ugali, beans, eggs)…" data-sw-ph="Tafuta vyakula (mf. ugali, maharage, mayai)…" class="field-input pl-10" autocomplete="off" />
-        </div>
-        <div class="mt-3 flex flex-wrap gap-2 text-xs font-600">
-          <button class="filter-chip is-active" data-filter="all" data-sw="Zote">All</button>
-          <button class="filter-chip" data-filter="local" data-sw="Kiafrika">East-African</button>
-          <button class="filter-chip" data-filter="street" data-sw="Mtaani / Chuo">Street &amp; Campus</button>
-          <button class="filter-chip" data-filter="general" data-sw="Kawaida">General</button>
+          <input id="food-search" type="text" placeholder="Search foods (e.g. beef, cabbage, ugali, mango)…" data-sw-ph="Tafuta vyakula (mf. nyama, kabichi, ugali, embe)…" class="field-input pl-10" autocomplete="off" />
         </div>
 
-        <ul id="food-results" class="mt-4 max-h-80 overflow-y-auto pr-1 space-y-2"></ul>
+        <!-- tabs -->
+        <div class="mt-3 flex flex-wrap gap-2 text-xs font-600">
+          <button class="food-tab is-active" data-tab="all" data-sw="Zote">All foods</button>
+          <button class="food-tab" data-tab="recent" data-sw="Za hivi karibuni">Recent</button>
+          <button class="food-tab" data-tab="frequent" data-sw="Za mara kwa mara">Frequent</button>
+          <button class="food-tab" data-tab="mine" data-sw="Vyangu">My foods</button>
+        </div>
+
+        <!-- group filter -->
+        <div class="mt-3">
+          <select id="group-filter" class="field-input !py-2.5 text-sm cursor-pointer"></select>
+        </div>
+
+        <ul id="food-results" class="mt-4 max-h-96 overflow-y-auto pr-1 space-y-2"></ul>
+
+        <!-- quick add calories -->
+        <details class="mt-5 rounded-2xl bg-muted p-4">
+          <summary class="cursor-pointer font-600 text-primary-deep text-sm" data-sw="+ Ongeza kalori haraka">+ Quick add calories</summary>
+          <div class="mt-3 grid grid-cols-2 gap-2">
+            <input id="qa-kcal" type="number" min="0" placeholder="kcal" data-sw-ph="kcal" class="field-input !py-2 text-sm" />
+            <select id="qa-meal" class="field-input !py-2 text-sm cursor-pointer">
+              <option value="breakfast" data-sw="Kifungua kinywa">Breakfast</option><option value="lunch" data-sw="Chakula cha mchana">Lunch</option><option value="dinner" data-sw="Chakula cha jioni">Dinner</option><option value="snacks" data-sw="Vitafunio">Snacks</option>
+            </select>
+            <button id="qa-add" type="button" class="btn-primary col-span-2 !py-2.5 justify-center" data-sw="Ongeza kalori">Add calories</button>
+          </div>
+        </details>
 
         <!-- custom food -->
-        <details class="mt-5 rounded-2xl bg-muted p-4">
+        <details class="mt-3 rounded-2xl bg-muted p-4">
           <summary class="cursor-pointer font-600 text-primary-deep text-sm" data-sw="+ Ongeza chakula maalum">+ Add a custom food</summary>
           <div class="mt-3 grid grid-cols-2 gap-2">
             <input id="cf-name" type="text" placeholder="Name" data-sw-ph="Jina" class="field-input col-span-2 !py-2 text-sm" />
+            <input id="cf-serving" type="text" placeholder="Serving (e.g. 1 plate)" data-sw-ph="Sehemu (mf. sahani 1)" class="field-input col-span-2 !py-2 text-sm" />
             <input id="cf-kcal" type="number" min="0" placeholder="kcal" data-sw-ph="kcal" class="field-input !py-2 text-sm" />
             <input id="cf-p" type="number" min="0" placeholder="protein g" data-sw-ph="protini g" class="field-input !py-2 text-sm" />
             <input id="cf-c" type="number" min="0" placeholder="carbs g" data-sw-ph="wanga g" class="field-input !py-2 text-sm" />
@@ -103,33 +154,75 @@
             <select id="cf-meal" class="field-input !py-2 text-sm col-span-2 cursor-pointer">
               <option value="breakfast" data-sw="Kifungua kinywa">Breakfast</option><option value="lunch" data-sw="Chakula cha mchana">Lunch</option><option value="dinner" data-sw="Chakula cha jioni">Dinner</option><option value="snacks" data-sw="Vitafunio">Snacks</option>
             </select>
-            <button id="cf-add" type="button" class="btn-primary col-span-2 !py-2.5 justify-center" data-sw="Ongeza chakula maalum">Add custom food</button>
+            <button id="cf-add" type="button" class="btn-primary col-span-2 !py-2.5 justify-center" data-sw="Hifadhi na uongeze">Save &amp; add</button>
+            <p id="cf-saved" class="hidden col-span-2 text-center text-xs font-600 text-primary"></p>
           </div>
         </details>
       </div>
 
-      <!-- MEAL LOG -->
+      <!-- MEAL LOG + EXTRAS -->
       <div class="lg:col-span-7 space-y-5">
-        <div class="flex items-center justify-between" data-reveal>
+        <div class="flex flex-wrap items-center justify-between gap-3" data-reveal>
           <h2 class="font-display text-xl font-600 text-primary-deeper" data-sw="Milo ya leo">Today's meals</h2>
-          <button id="clear-day" class="text-sm font-600 text-accent hover:underline cursor-pointer" data-sw="Futa siku">Clear day</button>
+          <div class="flex items-center gap-3">
+            <button id="repeat-yesterday" class="text-sm font-600 text-primary-deep hover:underline cursor-pointer" data-sw="Rudia jana">Repeat yesterday</button>
+            <button id="clear-day" class="text-sm font-600 text-accent hover:underline cursor-pointer" data-sw="Futa siku">Clear day</button>
+          </div>
         </div>
         <div id="meals"></div>
+
+        <!-- water + exercise -->
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div class="rounded-organic-lg bg-card border border-border shadow-soft p-5" data-reveal>
+            <div class="flex items-center justify-between">
+              <h3 class="font-600 text-primary-deeper" data-sw="Maji">Water</h3>
+              <p class="text-sm text-muted-ink"><span id="water-count">0</span> / 8 <span data-sw="glasi">glasses</span></p>
+            </div>
+            <div id="water-glasses" class="mt-3 flex flex-wrap gap-1.5 text-primary"></div>
+            <div class="mt-4 flex gap-2">
+              <button id="water-remove" class="btn-ghost flex-1 justify-center !py-2" aria-label="Remove a glass">−</button>
+              <button id="water-add" class="btn-primary flex-1 justify-center !py-2" data-sw="+ Glasi">+ Glass</button>
+            </div>
+          </div>
+
+          <div class="rounded-organic-lg bg-card border border-border shadow-soft p-5" data-reveal>
+            <h3 class="font-600 text-primary-deeper" data-sw="Kalori za mazoezi">Exercise calories</h3>
+            <p class="mt-1 text-xs text-muted-ink" data-sw="Ongeza kalori ulizochoma — zinaongezwa kwenye zilizobaki.">Add calories you burned — they're added back to your remaining total.</p>
+            <div class="mt-3 flex items-center gap-2">
+              <input id="ex-input" type="number" min="0" placeholder="0" class="field-input !py-2.5" />
+              <span class="text-sm font-600 text-muted-ink">kcal</span>
+            </div>
+            <p class="mt-3 text-xs text-muted-ink" data-sw="Tazama <a href=&quot;exercise.html&quot; class=&quot;underline text-primary&quot;>mazoezi</a> ya kuchoma kalori zaidi.">See <a href="exercise.html" class="underline text-primary">exercises</a> to burn more.</p>
+          </div>
+        </div>
+
+        <!-- daily note -->
+        <div class="rounded-organic-lg bg-card border border-border shadow-soft p-5" data-reveal>
+          <h3 class="font-600 text-primary-deeper" data-sw="Maelezo ya siku">Notes for the day</h3>
+          <textarea id="day-note" rows="2" placeholder="How did you feel? Cravings, energy, sleep…" data-sw-ph="Ulijisikiaje? Tamaa, nguvu, usingizi…" class="field-input mt-3 resize-y"></textarea>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ADD MODAL -->
+  <!-- ADD / EDIT MODAL -->
   <div id="add-modal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-ink/40 backdrop-blur-sm p-4">
     <div class="w-full max-w-sm rounded-organic-lg bg-card shadow-soft-lg border border-border p-6">
       <h3 id="modal-food-name" class="font-display text-lg font-600 text-primary-deeper">Food</h3>
-      <p id="modal-food-serving" class="text-sm text-muted-ink"></p>
       <div class="mt-4 grid grid-cols-2 gap-3">
-        <div><label for="modal-qty" class="field-label" data-sw="Sehemu">Servings</label><input id="modal-qty" type="number" min="0.25" step="0.25" value="1" class="field-input" /></div>
+        <div class="col-span-2"><label for="modal-unit" class="field-label" data-sw="Kipimo / sehemu">Serving size</label><select id="modal-unit" class="field-input cursor-pointer"></select></div>
+        <div><label for="modal-qty" class="field-label" data-sw="Idadi">Number of servings</label><input id="modal-qty" type="number" min="0.25" step="0.25" value="1" class="field-input" /></div>
         <div><label for="modal-meal" class="field-label" data-sw="Mlo">Meal</label><select id="modal-meal" class="field-input cursor-pointer"><option value="breakfast" data-sw="Kifungua kinywa">Breakfast</option><option value="lunch" data-sw="Chakula cha mchana">Lunch</option><option value="dinner" data-sw="Chakula cha jioni">Dinner</option><option value="snacks" data-sw="Vitafunio">Snacks</option></select></div>
       </div>
-      <p class="mt-3 text-sm text-ink-soft" data-sw="Hii inaongeza <span id=&quot;modal-kcal&quot; class=&quot;font-700 text-primary&quot;>0</span> kcal.">This adds <span id="modal-kcal" class="font-700 text-primary">0</span> kcal.</p>
+      <!-- live nutrition preview -->
+      <div class="mt-4 grid grid-cols-4 gap-2 text-center rounded-2xl bg-muted p-3">
+        <div><p class="font-display text-lg font-700 text-primary"><span id="modal-kcal">0</span></p><p class="text-[0.62rem] uppercase tracking-wide text-muted-ink">kcal</p></div>
+        <div><p class="font-600 text-sm text-ink"><span id="modal-p">0</span>g</p><p class="text-[0.62rem] uppercase tracking-wide text-muted-ink" data-sw="Protini">Protein</p></div>
+        <div><p class="font-600 text-sm text-ink"><span id="modal-c">0</span>g</p><p class="text-[0.62rem] uppercase tracking-wide text-muted-ink" data-sw="Wanga">Carbs</p></div>
+        <div><p class="font-600 text-sm text-ink"><span id="modal-f">0</span>g</p><p class="text-[0.62rem] uppercase tracking-wide text-muted-ink" data-sw="Mafuta">Fat</p></div>
+      </div>
       <div class="mt-5 flex gap-3">
+        <button id="modal-delete" type="button" class="hidden btn-ghost justify-center px-4 text-accent" aria-label="Delete entry"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg></button>
         <button id="modal-cancel" type="button" class="btn-ghost flex-1 justify-center" data-sw="Ghairi">Cancel</button>
         <button id="modal-add" type="button" class="btn-primary flex-1 justify-center" data-sw="Ongeza">Add</button>
       </div>

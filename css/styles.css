@@ -256,6 +256,36 @@ body { background-image: radial-gradient(circle at 15% -10%, rgba(16,185,129,0.1
 .log-item:last-child { border-bottom:none; }
 .del-btn { display:grid; place-items:center; height:1.9rem; width:1.9rem; border-radius:10px; color:#94A3B8; transition: background .15s, color .15s; cursor:pointer; }
 .del-btn:hover { background:#FEE2E2; color:#DC2626; }
+.log-item[data-edit] { cursor:pointer; border-radius:10px; transition: background .15s; }
+.log-item[data-edit]:hover { background:#F0F8F6; }
+
+/* ---------- Tracker: search tabs ---------- */
+.food-tab {
+  padding:0.4rem 0.85rem; border-radius:999px; border:1px solid #E1F2ED;
+  background:#fff; color:#64748B; transition: all .15s; cursor:pointer;
+}
+.food-tab:hover { border-color:var(--secondary); }
+.food-tab.is-active { background:var(--primary); color:#fff; border-color:var(--primary); }
+
+/* ---------- Tracker: macro donut ---------- */
+.macro-donut {
+  position:relative; height:6.5rem; width:6.5rem; border-radius:50%;
+  background: conic-gradient(rgba(255,255,255,0.18) 0 100%);
+  flex-shrink:0;
+}
+.macro-donut__hole {
+  position:absolute; inset:0.85rem; border-radius:50%;
+  background:var(--primary-deeper, #065F46);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; line-height:1;
+}
+:root.dark .macro-donut__hole { background:#06281C; }
+
+/* ---------- Tracker: water glasses ---------- */
+.water-glass { display:inline-grid; place-items:center; height:1.9rem; width:1.6rem; color:#CBD5E1; }
+.water-glass svg { height:100%; width:100%; }
+.water-glass.is-full { color:var(--primary); }
+.dark .water-glass { color:#33473E; }
+.dark .water-glass.is-full { color:var(--primary); }
 
 /* ---------- No-JS fallback ---------- */
 .no-js [data-reveal] { opacity:1; transform:none; }
